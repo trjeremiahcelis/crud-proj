@@ -17,15 +17,7 @@ const Crud = () => {
     }, [])
 
     const [isLoading, setLoading] = useState(true)
-
-    /* Handle change of the form */
-    const handleChangeForm = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        /* set student info of the target input using name */
-        /* setStudentInfo(values => ({ ...values, [name]: value })) */
-        //setStudentInfo({ [name]: value })
-    }
+    
     /* Handle Submit */
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,14 +28,13 @@ const Crud = () => {
             stud_address: address,
             stud_contact: contact
         }
-
-        console.log(data)
+        // console.log(data)
         try {
             // AXIOS POST Request
             axios.post('http://localhost:8081/students/create', data)
                 .then(res => {
-                    console.log(res)
-                    console.log(res.data)
+                    //console.log(res)
+                    //console.log(res.data)
                     getStudent();
                     Swal.fire({
                         title: 'Student Created!',
@@ -116,8 +107,10 @@ const Crud = () => {
                                     setAddress:setAddress, 
                                     setContact:setContact }
                     }} 
-                    studentInfo={studentInfo} setStudentInfo={setStudentInfo} 
-                        getStudent={getStudent} isLoading={isLoading} />
+                    studentInfo={studentInfo} 
+                    setStudentInfo={setStudentInfo} 
+                    getStudent={getStudent} 
+                    isLoading={isLoading} />
             </div>
         </div>
     );

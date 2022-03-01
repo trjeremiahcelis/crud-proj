@@ -14,10 +14,11 @@ Modal.setAppElement('#root');
 const Table = (props) => {
     function closeModal() { setModalIsOpen = (false) };
     const [modalisOpen, setModalIsOpen] = useState(false);
-    const studentData = props.student;
+    //const studentData = props.student;
     const studentInfo = props.studentInfo;
     const setStudentInfo = props.setStudentInfo;
     const students = studentInfo.students;
+    console.log(students)
     const getStudent = props.getStudent;
     const isLoading = props.isLoading;
     const [title, setTitle] = useState({
@@ -33,6 +34,8 @@ const Table = (props) => {
     const [updateAddress, setUpdateAddress] = useState('')
     const [updateContact, setUpdateContact] = useState('')
 
+    const [searchTerm, setSearchTerm] = useState("");
+    console.log('search term: ', searchTerm)
     // Every time the state change it will trigger the func getStudent 
     useEffect(() => {
         getStudent();
@@ -40,7 +43,6 @@ const Table = (props) => {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        /* FIXME: */
         let updateData = {
             stud_id: title.title_ID,
             new_fname: updateFname,
@@ -53,11 +55,15 @@ const Table = (props) => {
         try {
             axios.put('http://localhost:8081/students/update', updateData)
                 .then((res) => {
-                    console.log(res.data)
-                    console.log(res)
-                    alert('Student information updated!')
-                }) 
-                setModalIsOpen(false)
+                    //console.log(res.data)
+                    //console.log(res)
+                    getStudent();
+                    Swal.fire({
+                        text: 'Successfully updated!',
+                        icon: 'success'
+                    })
+                })
+            setModalIsOpen(false)
         } catch (error) {
             console.error(error);
         }
@@ -118,7 +124,7 @@ const Table = (props) => {
         <div className="table">
             <div className="header"><ul>
                 <li className="filterTitle">Filter Results</li>
-                <li><Search /></li>
+                <li><Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /></li>
             </ul></div>
             <table className="table-content">
                 <tbody className="body-container">
@@ -130,26 +136,38 @@ const Table = (props) => {
                         <td>Action</td>
                     </tr>
 
-                    {students.map((student) => {
-                        return (
-                            <tr key={student.stud_id} className='data'>
-                                <td>{student.stud_fname + " " + student.stud_lname}</td>
-                                <td>{student.stud_no}</td>
-                                <td>{student.stud_address}</td>
-                                <td>{student.stud_contact}</td>
-                                <td><div className="dropdown">
-                                    <Icon path={mdiDotsVertical} title="action" size={1} />
-                                    <div className="dropdown-content">
-                                        <li> Options</li>
-                                        <EditButton UpdateId={student.stud_id} studNum={student.studNo} 
-                                            fName={student.stud_fname} lName={student.stud_lname} />
-                                        <DeleteButton DeleteId={student.stud_id} />
+                    {students.filter((val) => {
+                        //if the searchterm is empty then return the values of the table
+                        if (searchTerm == "") {
+                            return val
+                        //else if the value fname, lname, address is equal to searchterm return value
+                        } else if (val.stud_fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                    val.stud_lname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                    val.stud_address.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return val
+                        }
+                    })
+                        .map((student) => {
+                            return (
+                                <tr key={student.stud_id} className='data'>
+                                    <td>{student.stud_fname + " " + student.stud_lname}</td>
+                                    <td>{student.stud_no}</td>
+                                    <td>{student.stud_address}</td>
+                                    <td>{student.stud_contact}</td>
+                                    <td><div className="dropdown">
+                                        <Icon path={mdiDotsVertical} title="action" size={1} />
+                                        <div className="dropdown-content">
+                                            <li> Options</li>
+                                            <EditButton UpdateId={student.stud_id} studNum={student.studNo}
+                                                fName={student.stud_fname} lName={student.stud_lname} />
+                                            <DeleteButton DeleteId={student.stud_id} />
+                                        </div>
                                     </div>
-                                </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            )
+                        }
                         )}
-                    )}
                 </tbody>
             </table>
 

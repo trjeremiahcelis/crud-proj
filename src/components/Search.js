@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Search = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const handleChange = (e) => {
-        setSearchTerm(e.target.value)
-    }
+const Search = (props) => {
+    const handleChange = (e) => { setSearchTerm(e.target.value) };
+    const searchTerm = props.searchTerm;
+    const setSearchTerm = props.setSearchTerm;
     return (
         <div className="search-content">
-            <input type="text" className="searchInput" placeholder="Search..." onChange={handleChange} />
-            {/* {searchTerm.filter((val) => {
-                if (searchTerm == "") {
-                    return val
-                } else if (val.searchTerm.to) {
-                    
-                }
-            })} */}
+            <input type="text" className="searchInput" placeholder="Search..."
+                 onChange={handleChange} value={searchTerm} />
         </div>
     );
 }

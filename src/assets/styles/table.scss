@@ -30,21 +30,19 @@ $color-4                            : #837d7daf;
     .table-content{
         border-spacing: 0px 0px;
         width: 100%;
+        text-align: center;
         .table-header{
             font-size: 0.9rem;
-            text-align: center;
             height: 50px;
             font-weight: 600;
             background-color: $color-1;
+            border-bottom: $color-4 1px solid;
         }
-
         .data{
-            /* margin-top: 2%; */
             font-size: 13px;
-            text-align: center;
             td{
                 background-color: $color-1;
-                padding: 4vh;
+                padding: 4.3vh;
                 border-bottom: $color-4 1px solid;
             }
 
