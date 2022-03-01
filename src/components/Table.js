@@ -91,7 +91,7 @@ const Table = (props) => {
     const DeleteButton = (props) => (
         <a onClick={(e) => {
             e.preventDefault();
-            console.log(props.DeleteId)
+            // console.log(props.DeleteId)
             // Delete request when button is clicked 
             Swal.fire({
                 title: 'Are you sure?',
@@ -136,17 +136,18 @@ const Table = (props) => {
                         <td>Action</td>
                     </tr>
 
-                    {students.filter((val) => {
-                        //if the searchterm is empty then return the values of the table
-                        if (searchTerm == "") {
-                            return val
-                        //else if the value fname, lname, address is equal to searchterm return value
-                        } else if (val.stud_fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                    val.stud_lname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                    val.stud_address.toLowerCase().includes(searchTerm.toLowerCase())) {
-                            return val
-                        }
-                    })
+                    {students
+                        .filter((val) => {
+                            //if the searchterm is empty then return the values of the table
+                            if (searchTerm == "") {
+                                return val
+                                //else if the value fname, lname, address is equal to searchterm return value
+                            } else if (val.stud_fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                val.stud_lname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                val.stud_address.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return val
+                            }
+                        })
                         .map((student) => {
                             return (
                                 <tr key={student.stud_id} className='data'>
@@ -165,8 +166,7 @@ const Table = (props) => {
                                     </div>
                                     </td>
                                 </tr>
-                            )
-                        }
+                            )}
                         )}
                 </tbody>
             </table>
