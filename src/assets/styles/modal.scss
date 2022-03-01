@@ -1,0 +1,46 @@
+$title                  : #969696;
+
+@mixin buttonUpdate {
+    background-color    : rgb(26, 154, 240);
+    border              : none;
+    width               : 210px;
+    height              : 29px;
+    color               : white;
+    font-size           : 1em;
+    font-weight         : bold;
+    border-radius       : 6px;
+    position            : absolute;
+    top                 : 90%;
+    left                : 30%;
+    margin              : -20px 0 0 -35px;
+}
+
+.student-form{
+    display             : flex;
+    flex-direction      : column;
+    h4{
+        color           : $title;
+    }
+    .input-update{
+        padding         : 8px 40px;
+        label{
+            font-size   : 15px;
+        }
+        input {
+            display     : inline-block;
+            float       : right;
+            margin-right: 40vw;
+            border      : 2px solid #bebbbb;
+            transition  : 0.5s;
+            width       : 40%;
+            height      : 4.3vh;
+            box-sizing  : border-box;
+        }
+        input:focus {
+            border      : 2px solid #555;
+        }
+    }
+    .update-btn{
+        @include buttonUpdate();
+    }
+}

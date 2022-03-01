@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@300&display=swap');
+$font-1                         : "Roboto", "sans-serif";
+$color-2                        : #f5f5fb;
+
+@mixin theme {
+    background-color: $color-2;
+}
+
+*{
+    font-family                 : $font-1;
+}
+
+html, body{
+    margin                      : 0;
+    @include theme();
+}
+
+.app {
+    @import './nav.scss';
+
+    .home-content{
+        display                 : flex;
+        flex-direction: row;
+        margin-left             : 6%;
+        @import './crud.scss';
+
+        .table{
+            margin-left         : 3vw;
+            @import './table.scss';
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .app{
+        .home-content{
+            display                 : flex;
+            flex-direction          : column;
+        }
+    }
+}
