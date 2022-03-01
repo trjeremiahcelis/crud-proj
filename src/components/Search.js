@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
 const Search = (props) => {
     const handleChange = (e) => { setSearchTerm(e.target.value) };
     const searchTerm = props.searchTerm;
