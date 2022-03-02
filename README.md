@@ -1,3 +1,3 @@
 # Description: a simple CRUD project
-# Demo: Here is the <a href=""> live preview </a>
-# Techs: ReactJS, NodeJS, & SASS
+# <p> Demo: Here is the <a href=""> live preview </a></p>
+# <p>Techs: ReactJS, NodeJS, & SASS</p>
