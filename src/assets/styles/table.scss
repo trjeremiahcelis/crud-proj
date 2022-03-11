@@ -16,14 +16,26 @@ $color-4                            : #837d7daf;
             margin: 0;
             padding: 0;
             position: absolute;
-            overflow: hidden;
-            top: 2.3vh;
+            // /overflow: hidden;
+            top: 2vh;
             transform: translate(0, -20%);
             .filterTitle{ border-right: solid 1px #8f8f8f81; }
             li{
                 padding: 10px 26px;
                 list-style-type: none;
                 float: left;
+            }
+            .search-content{
+                input{
+                    height: 20px;
+                    width: 200px;
+                    border-radius: 5px;
+                    border: 1px rgb(0, 2, 128) solid;
+                    transition: 0.5s;
+                }
+                input:focus{
+                    border: 1px rgb(53, 54, 53) solid;
+                }
             }
         }
     }

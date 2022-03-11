@@ -7,7 +7,7 @@ const Nav = () => {
         <nav className="nav">
             <ul className="before">
                 <li><img src={Logo} alt="logo" /></li>
-                <li><a href="/">
+                <li><a href="/home">
                     <Icon path={mdiHome} title="action" size={1} className='Table' color='white' />
                 </a></li>
                 <li><a href="/">
@@ -17,7 +17,7 @@ const Nav = () => {
 
             <ul className="after">
                 <li><img src={Logo} alt="logo" /></li>
-                <li><a href="/">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="/">Table</a></li>
             </ul>
         </nav>

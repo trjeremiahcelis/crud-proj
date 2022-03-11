@@ -14,6 +14,13 @@ $color-3                            : black;
     border-radius: 6px;
 }
 
+@mixin errorMessage {
+    padding: 0.3vh;
+    color: red;
+    font-size: 0.8rem;
+    transition: 1.5s;
+}
+
  /* Flexbox */
  .student-form{
     display: flex;
@@ -31,7 +38,8 @@ $color-3                            : black;
             margin-top: 14px;
             flex-direction: column;
             input{
-                width: 200px;
+                width: 16vw;
+                height: 3.6vh;
             }
         }
         .submit-btn{
@@ -39,4 +47,8 @@ $color-3                            : black;
             @include buttonSuccess();
         }
  }
+}
+
+.reqError{
+    @include errorMessage();
 }

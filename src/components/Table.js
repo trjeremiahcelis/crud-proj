@@ -16,9 +16,9 @@ const Table = (props) => {
     const [modalisOpen, setModalIsOpen] = useState(false);
     //const studentData = props.student;
     const studentInfo = props.studentInfo;
-    const setStudentInfo = props.setStudentInfo;
+    //const setStudentInfo = props.setStudentInfo;
     const students = studentInfo.students;
-    console.log(students)
+    //console.log(students)
     const getStudent = props.getStudent;
     const isLoading = props.isLoading;
     const [title, setTitle] = useState({
@@ -35,7 +35,7 @@ const Table = (props) => {
     const [updateContact, setUpdateContact] = useState('')
 
     const [searchTerm, setSearchTerm] = useState("");
-    console.log('search term: ', searchTerm)
+    //console.log('search term: ', searchTerm)
     // Every time the state change it will trigger the func getStudent 
     useEffect(() => {
         getStudent();
@@ -51,9 +51,9 @@ const Table = (props) => {
             new_contact: updateContact,
             new_address: updateAddress
         }
-        console.log(updateData)
+        //console.log(updateData)
         try {
-            axios.put('http://localhost:8081/students/update', updateData)
+            await axios.put('http://localhost:8081/students/update', updateData)
                 .then((res) => {
                     //console.log(res.data)
                     //console.log(res)
@@ -141,7 +141,7 @@ const Table = (props) => {
                             //if the searchterm is empty then return the values of the table
                             if (searchTerm == "") {
                                 return val
-                                //else if the value fname, lname, address is equal to searchterm return value
+                                //else if the value fname, lname, address is equal to searchterm return the equal value
                             } else if (val.stud_fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
                                 val.stud_lname.toLowerCase().includes(searchTerm.toLowerCase()) ||
                                 val.stud_address.toLowerCase().includes(searchTerm.toLowerCase())) {
