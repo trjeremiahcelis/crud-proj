@@ -7,18 +7,18 @@ const Nav = () => {
         <nav className="nav">
             <ul className="before">
                 <li><img src={Logo} alt="logo" /></li>
-                <li><a href="/home">
+                <li><a href="/">
                     <Icon path={mdiHome} title="action" size={1} className='Table' color='white' />
                 </a></li>
-                <li><a href="/">
+                <li><a href="/Table">
                     <Icon path={mdiTableLarge} title="action" size={0.9} className='Table' color='white' />
                 </a></li>
             </ul>
 
             <ul className="after">
                 <li><img src={Logo} alt="logo" /></li>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/">Table</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Table">Table</a></li>
             </ul>
         </nav>
     );

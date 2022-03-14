@@ -16,7 +16,7 @@ $color-4                            : #837d7daf;
             margin: 0;
             padding: 0;
             position: absolute;
-            // /overflow: hidden;
+            //overflow: hidden;
             top: 2vh;
             transform: translate(0, -20%);
             .filterTitle{ border-right: solid 1px #8f8f8f81; }
@@ -39,6 +39,7 @@ $color-4                            : #837d7daf;
             }
         }
     }
+
     .table-content{
         border-spacing: 0px 0px;
         width: 100%;
@@ -103,10 +104,11 @@ $color-4                            : #837d7daf;
    .loading{
     justify-content: center;
     display: flex;
+
     .spinner{
         margin-top: 10vh;
         height: 100px;
         width: 100px;
     }
    }
-    }
+}

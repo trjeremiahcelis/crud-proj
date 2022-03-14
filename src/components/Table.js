@@ -12,13 +12,11 @@ import '../assets/styles/modal.scss'
 Modal.setAppElement('#root');
 
 const Table = (props) => {
+    // modal function
     function closeModal() { setModalIsOpen = (false) };
     const [modalisOpen, setModalIsOpen] = useState(false);
-    //const studentData = props.student;
     const studentInfo = props.studentInfo;
-    //const setStudentInfo = props.setStudentInfo;
     const students = studentInfo.students;
-    //console.log(students)
     const getStudent = props.getStudent;
     const isLoading = props.isLoading;
     const [title, setTitle] = useState({
@@ -29,13 +27,11 @@ const Table = (props) => {
     });
 
     const [updateFname, setUpdateFname] = useState('')
-    const [updateLname, setUpdateLname] = useState('')
     const [updateStudNumber, setUpdateStudNumber] = useState('')
     const [updateAddress, setUpdateAddress] = useState('')
     const [updateContact, setUpdateContact] = useState('')
 
     const [searchTerm, setSearchTerm] = useState("");
-    //console.log('search term: ', searchTerm)
     // Every time the state change it will trigger the func getStudent 
     useEffect(() => {
         getStudent();
@@ -43,17 +39,16 @@ const Table = (props) => {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
+        //console.log(title.title_ID)
         let updateData = {
-            stud_id: title.title_ID,
-            new_fname: updateFname,
-            new_lname: updateLname,
-            new_studno: updateStudNumber,
-            new_contact: updateContact,
-            new_address: updateAddress
+            name: updateFname,
+            studentNumber: updateStudNumber,
+            contact: updateContact,
+            address: updateAddress
         }
-        //console.log(updateData)
+       
         try {
-            await axios.put('http://localhost:8081/students/update', updateData)
+            await axios.put(`http://localhost:8084/student/update/${title.title_ID}`, updateData)
                 .then((res) => {
                     //console.log(res.data)
                     //console.log(res)
@@ -91,8 +86,6 @@ const Table = (props) => {
     const DeleteButton = (props) => (
         <a onClick={(e) => {
             e.preventDefault();
-            // console.log(props.DeleteId)
-            // Delete request when button is clicked 
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'Do you really want to delete this?',
@@ -103,14 +96,15 @@ const Table = (props) => {
                 confirmButtonText: 'Yes'
             })
             try {
-                axios.delete(`http://localhost:8081/students/delete?stud_id=${props.DeleteId}`, {
+                // Delete request when button is clicked 
+                axios.delete(`http://localhost:8084/student/delete/${props.DeleteId}`, {
                     method: "DELETE"
                 })
                     /* TODO: add if else here 
                        FIXME: if press cancel it also proceeds to delete */
                     .then((res) => {
-                        console.log(res)
-                        console.log(res.data)
+                        /* console.log(res)
+                        console.log(res.data) */
                         getStudent();
                         Swal.fire('Deleted!')
                     })
@@ -123,7 +117,7 @@ const Table = (props) => {
     return (
         <div className="table">
             <div className="header"><ul>
-                <li className="filterTitle">Filter Results</li>
+                <li className="filterTitle">Search</li>
                 <li><Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /></li>
             </ul></div>
             <table className="table-content">
@@ -137,36 +131,36 @@ const Table = (props) => {
                     </tr>
 
                     {students
-                        .filter((val) => {
+                        .filter((value) => {
                             //if the searchterm is empty then return the values of the table
                             if (searchTerm == "") {
-                                return val
+                                return value
                                 //else if the value fname, lname, address is equal to searchterm return the equal value
-                            } else if (val.stud_fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                val.stud_lname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                val.stud_address.toLowerCase().includes(searchTerm.toLowerCase())) {
-                                return val
+                            } else if (value.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                        value.address.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return value
                             }
                         })
                         .map((student) => {
                             return (
-                                <tr key={student.stud_id} className='data'>
-                                    <td>{student.stud_fname + " " + student.stud_lname}</td>
-                                    <td>{student.stud_no}</td>
-                                    <td>{student.stud_address}</td>
-                                    <td>{student.stud_contact}</td>
+                                <tr key={student.id} className='data'>
+                                    <td>{student.name}</td>
+                                    <td>{student.studentNumber}</td>
+                                    <td>{student.address}</td>
+                                    <td>{student.contact}</td>
                                     <td><div className="dropdown">
                                         <Icon path={mdiDotsVertical} title="action" size={1} />
                                         <div className="dropdown-content">
                                             <li> Options</li>
-                                            <EditButton UpdateId={student.stud_id} studNum={student.studNo}
-                                                fName={student.stud_fname} lName={student.stud_lname} />
-                                            <DeleteButton DeleteId={student.stud_id} />
+                                            <EditButton UpdateId={student.id} studNum={student.studentNumber}
+                                                fName={student.name} />
+                                            <DeleteButton DeleteId={student.id} />
                                         </div>
                                     </div>
                                     </td>
                                 </tr>
-                            )}
+                            )
+                        }
                         )}
                 </tbody>
             </table>
@@ -178,29 +172,24 @@ const Table = (props) => {
                     <div className="personal-info">
                         <h4>Personal Information</h4>
                         <div className="input-update">
-                            <label> First Name: </label>
-                            <input type="text" id="txt-input" name="new_fname"
+                            <label> Full Name: </label>
+                            <input type="text" id="txt-input" name="name"
                                 value={updateFname} onChange={(e) => setUpdateFname(e.target.value)} />
                         </div>
                         <div className="input-update">
-                            <label> Last Name: </label>
-                            <input type="text" id="txt-input" name="new_lname"
-                                value={updateLname} onChange={(e) => setUpdateLname(e.target.value)} />
-                        </div>
-                        <div className="input-update">
                             <label> Student Number: </label>
-                            <input type="text" id="txt-input" name="new_studno" maxLength={10}
+                            <input type="text" id="txt-input" name="studentNumber" maxLength={10}
                                 value={updateStudNumber} onChange={(e) => setUpdateStudNumber(e.target.value)} />
                         </div>
                         <h4>Contact Information</h4>
                         <div className="input-update">
                             <label> Address: </label>
-                            <input type="text" id="txt-input" name="new_address"
+                            <input type="text" id="txt-input" name="address"
                                 value={updateAddress} onChange={(e) => setUpdateAddress(e.target.value)} />
                         </div>
                         <div className="input-update">
                             <label> Contact: </label>
-                            <input type="tel" id="txt-input" name="new_contact"
+                            <input type="tel" id="txt-input" name="contact"
                                 value={updateContact} onChange={(e) => setUpdateContact(e.target.value)} />
                         </div>
                         <input type="submit" value="UPDATE STUDENT" className="update-btn" />
