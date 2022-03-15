@@ -1,0 +1,57 @@
+
+.home-content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.home-content > div {
+    padding: 20px;
+    margin: 10px;
+}
+
+.card1, .card2, .card3, .card4, .notice{
+    flex: 1;
+    flex-basis: 20%;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 #00000033;
+    //width: 20%;
+    border-radius: 13px;
+    color: aliceblue;
+    p{
+        font-weight: 700;
+    }
+}
+
+.card1{
+    background: linear-gradient(#2fb6b1, #42f0ea);
+}
+
+.card2{
+    background: linear-gradient(#0796cc,  #0cb2ee);
+}
+
+.card3{
+    background: linear-gradient(#e96188, #e78ca6);
+}
+
+.card4{
+    background: linear-gradient(#ea18f1, #e576e9);
+}
+
+.notice{
+    color: black;
+    text-align: start;
+}
+
+.notice-content{
+    list-style-type: none;
+    li{
+        padding: 10px;
+    }
+
+    li:hover{
+        background: #9b99992f;
+    }
+}
