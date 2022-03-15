@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import Crud from './pages/Crud';
 import Home from './pages/Home';
@@ -11,7 +11,6 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/Table" element={<Crud />} />
         </Routes>
-        {/* <Crud /> */}
       </div>
   );
 }
