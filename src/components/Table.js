@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
-import { mdiDotsVertical, mdiCloseCircle } from '@mdi/js'
-import Icon from '@mdi/react'
-import Modal from 'react-modal'
-import Swal from 'sweetalert2/dist/sweetalert2'
-import 'sweetalert2/src/sweetalert2.scss'
-import Search from './Search'
-import Spinner from '../assets/images/spinner.svg'
-import '../styles/modal.scss'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { mdiDotsVertical, mdiCloseCircle } from '@mdi/js';
+import Icon from '@mdi/react';
+import Modal from 'react-modal';
+import Swal from 'sweetalert2/dist/sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
+import Search from './Search';
+import Spinner from '../assets/images/spinner.svg';
+import '../styles/modal.scss';
 
 Modal.setAppElement('#root');
 
@@ -26,10 +26,10 @@ const Table = (props) => {
         title_lname: ''
     });
 
-    const [updateFname, setUpdateFname] = useState('')
-    const [updateStudNumber, setUpdateStudNumber] = useState('')
-    const [updateAddress, setUpdateAddress] = useState('')
-    const [updateContact, setUpdateContact] = useState('')
+    const [updateFname, setUpdateFname] = useState('');
+    const [updateStudNumber, setUpdateStudNumber] = useState('');
+    const [updateAddress, setUpdateAddress] = useState('');
+    const [updateContact, setUpdateContact] = useState('');
 
     const [searchTerm, setSearchTerm] = useState("");
     // Every time the state change it will trigger the func getStudent 
@@ -47,8 +47,8 @@ const Table = (props) => {
         }
         await axios.put(`http://localhost:8084/student/update/${title.title_ID}`, updateData)
             .then((res) => {
-                //console.log(res.data)
-                //console.log(res)
+                /* console.log(res.data)
+                console.log(res) */
                 getStudent();
                 Swal.fire({
                     text: 'Successfully updated!',
@@ -59,7 +59,7 @@ const Table = (props) => {
                 console.error(err);
             })
         setModalIsOpen(false)
-    }
+    };
 
     const EditButton = (props) => {
         return (
@@ -78,7 +78,7 @@ const Table = (props) => {
                 }}>Edit</a>
             </div>
         )
-    }
+    };
 
     const DeleteButton = (props) => (
         <a onClick={(e) => {
@@ -108,7 +108,7 @@ const Table = (props) => {
                     console.error(err)
                 })
         }}>Delete</a>
-    )
+    );
 
     return (
         <div className="table">
