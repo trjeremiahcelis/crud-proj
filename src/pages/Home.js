@@ -1,21 +1,35 @@
-import '../assets/styles/home.scss';
+import '../styles/home.scss';
 import Icon from '@mdi/react';
-import { mdiAccount, mdiHomeAccount, mdiAccountSupervisor } from '@mdi/js';
+import { mdiAccount, mdiHomeAccount, mdiAccountSupervisor, mdiAccountPlus } from '@mdi/js';
 
 const Home = () => {
     return (
         <div className="home-content">
             <div className='card1'>
-                <a href=""><Icon path={mdiAccount} size={5} color="white" /></a>
-                <p>Students 5,000</p>
+                <a href=""><Icon path={mdiAccount} size={3} color="white" /></a>
+                <p>Lorem Ipsum</p>
             </div>
             <div className='card2'>
-                <a href=""><Icon path={mdiAccountSupervisor} size={5} color="white" /></a>
-                <p>Teachers 200</p>
+                <a href=""><Icon path={mdiAccountSupervisor} size={3} color="white" /></a>
+                <p>Lorem Ipsum</p>
             </div>
             <div className='card3'>
-                <a href=""><Icon path={mdiHomeAccount} size={5} color="white" /></a>
-                <p>Classes 150</p>
+                <a href=""><Icon path={mdiHomeAccount} size={3} color="white" /></a>
+                <p>Lorem Ipsum</p>
+            </div>
+            <div className='card4'>
+                <a href="/table"><Icon path={mdiAccountPlus } size={3} color="white" /></a>
+                <p>New</p>
+            </div>
+            <div className='notice'>
+                <p>Notice Board</p>
+                <ul className='notice-content'>
+                    <li>Lorem ipsum dolor sit amet</li>
+                    <li>Onsectetur adipiscing elit</li>
+                    <li>Sed do eiusmod tempor incididunt</li>
+                    <li>Ut enim ad minim veniam</li>
+                    <li>Ut enim ad minim veniam</li>
+                </ul>
             </div>
         </div>
     );
