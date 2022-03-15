@@ -7,7 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2'
 import 'sweetalert2/src/sweetalert2.scss'
 import Search from './Search'
 import Spinner from '../assets/images/spinner.svg'
-import '../assets/styles/modal.scss'
+import '../styles/modal.scss'
 
 Modal.setAppElement('#root');
 
@@ -39,29 +39,26 @@ const Table = (props) => {
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        //console.log(title.title_ID)
         let updateData = {
             name: updateFname,
             studentNumber: updateStudNumber,
             contact: updateContact,
             address: updateAddress
         }
-       
-        try {
-            await axios.put(`http://localhost:8084/student/update/${title.title_ID}`, updateData)
-                .then((res) => {
-                    //console.log(res.data)
-                    //console.log(res)
-                    getStudent();
-                    Swal.fire({
-                        text: 'Successfully updated!',
-                        icon: 'success'
-                    })
+        await axios.put(`http://localhost:8084/student/update/${title.title_ID}`, updateData)
+            .then((res) => {
+                //console.log(res.data)
+                //console.log(res)
+                getStudent();
+                Swal.fire({
+                    text: 'Successfully updated!',
+                    icon: 'success'
                 })
-            setModalIsOpen(false)
-        } catch (error) {
-            console.error(error);
-        }
+            })
+            .catch(err => {
+                console.error(err);
+            })
+        setModalIsOpen(false)
     }
 
     const EditButton = (props) => {
@@ -95,22 +92,21 @@ const Table = (props) => {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes'
             })
-            try {
-                // Delete request when button is clicked 
-                axios.delete(`http://localhost:8084/student/delete/${props.DeleteId}`, {
-                    method: "DELETE"
+            // Delete request when button is clicked 
+            axios.delete(`http://localhost:8084/student/delete/${props.DeleteId}`, {
+                method: "DELETE"
+            })
+                /* TODO: add if else here 
+                   FIXME: if press cancel it also proceeds to delete */
+                .then((res) => {
+                    /* console.log(res)
+                    console.log(res.data) */
+                    getStudent();
+                    Swal.fire('Deleted!')
                 })
-                    /* TODO: add if else here 
-                       FIXME: if press cancel it also proceeds to delete */
-                    .then((res) => {
-                        /* console.log(res)
-                        console.log(res.data) */
-                        getStudent();
-                        Swal.fire('Deleted!')
-                    })
-            } catch (err) {
-                console.error(err)
-            }
+                .catch(err => {
+                    console.error(err)
+                })
         }}>Delete</a>
     )
 
@@ -137,7 +133,7 @@ const Table = (props) => {
                                 return value
                                 //else if the value fname, lname, address is equal to searchterm return the equal value
                             } else if (value.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                        value.address.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                value.address.toLowerCase().includes(searchTerm.toLowerCase())) {
                                 return value
                             }
                         })
