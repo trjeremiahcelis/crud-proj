@@ -9,12 +9,12 @@ const Crud = () => {
     /* Use State */
     const [studentInfo, setStudentInfo] = useState({ students: [] });
     const [fname, setFname] = useState('');
-    const [lname, setLname] = useState('');
     const [studNumber, setStudNumber] = useState('');
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [formData, setFormData] = useState("");
-    const { register, formState: { errors } ,handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
     useEffect(() => {
         getStudent();
     }, []);
@@ -25,23 +25,18 @@ const Crud = () => {
     const onSubmit = async (formData, e) => {
         e.preventDefault();
         setFormData(JSON.stringify(formData));
-        //console.log(formData);
-        try {
-            // AXIOS POST Request
-            await axios.post('http://localhost:8084/student/add', formData)
-                .then(res => {
-                    //console.log(res)
-                    //console.log(res.data)
-                    getStudent();
-                    Swal.fire({
-                        title: 'Student Created!',
-                        text: 'Successfully created!',
-                        icon: 'success'
-                    })
+        // AXIOS POST Request
+        await axios.post('http://localhost:8084/student/add', formData)
+            .then(res => {
+                getStudent();
+                Swal.fire({
+                    title: 'Student Created!',
+                    text: 'Successfully created!',
+                    icon: 'success'
                 })
-        } catch (error) {
-            console.error(error)
-        }
+            })
+            .catch(err => { console.error(err) })
+            e.target.reset();
     }
 
     const getStudent = async () => {
@@ -53,23 +48,29 @@ const Crud = () => {
             })
             .catch((error) => { console.error(error); })
     }
+
     return (
         <div className="home-content">
             <form className="student-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="personal-info">
+                <div className="personal-info">
                     <h4>Personal Information</h4>
                     <div className="input-groups">
                         <label> Full Name:</label>
                         <input type="text" {...register("name", { pattern: /^[A-Za-z/\s/g]+$/i, required: true })} />
-                         {/* Form error handlers */}
-                        {errors.name?.type === 'pattern' && <span className="reqError">Please input proper Full name</span>}
-                        {errors.name?.type === 'required' && <span className="reqError">This field is required</span>}
+                        
+                        {/* Form error validation */}
+                        {errors.name?.type === 'pattern' && 
+                            <span className="reqError">Please input proper Full name</span>}
+                        {errors.name?.type === 'required' && 
+                            <span className="reqError">This field is required</span>}
                     </div>
 
                     <div className="input-groups">
                         <label> Student Number:</label>
                         <input type="text" {...register("studentNumber", { required: true })} />
-                        {errors.studentNumber?.type === 'required' && <span className="reqError">This field is required</span>}
+                        
+                        {errors.studentNumber?.type === 'required' && 
+                            <span className="reqError">This field is required</span>}
                     </div>
 
                     <h4>Contact Information</h4>
@@ -77,10 +78,15 @@ const Crud = () => {
                         <label> Address:</label>
                         <input type="text" {...register("address")} />
                     </div>
+
                     <div className="input-groups">
-                        <label> Contact:</label>
-                        <input type="text" {...register("contact", { pattern: /^[0-9+-]+$/i })} />
-                        {errors.contact?.type === 'pattern' && <span className="reqError">The number is not valid.</span> }
+                        <label> Mobile Number:</label>
+                        <input type="text" {...register("contact", { pattern: /^[0-9+-]+$/i, minLength: 11 })} />
+                        
+                        {errors.contact?.type === 'pattern' && 
+                            <span className="reqError">The number is not valid.</span>}
+                        {errors.contact?.type === 'minLength' && 
+                            <span className="reqError">You must input 11 numbers</span>}
                     </div>
                     <input type="submit" value="ADD STUDENT" className="submit-btn" />
                 </div>
@@ -91,14 +97,12 @@ const Crud = () => {
                     student={{
                         state: {
                             fname: fname,
-                            lname: lname,
                             studNumber: studNumber,
                             address: address,
                             contact: contact
                         },
                         setState: {
                             setFname: setFname,
-                            setLname: setLname,
                             setStudNumber: setStudNumber,
                             setAddress: setAddress,
                             setContact: setContact
