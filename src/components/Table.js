@@ -113,7 +113,7 @@ const Table = (props) => {
     return (
         <div className="table">
             <div className="header"><ul>
-                <li className="filterTitle">Search</li>
+                {/* <li className="filterTitle">Search</li> */}
                 <li><Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /></li>
             </ul></div>
             <table className="table-content">
