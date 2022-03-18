@@ -6,7 +6,9 @@ $color-4                            : #837d7daf;
 .table{
     margin: 2vh;
     background-color: $color-2;
+    box-shadow: 0 2px 4px 0 #00000033;
     .header{
+        border-top-left-radius: 10px;
         background-color: $color-1;
         height: 8vh; 
         position: relative;
@@ -18,7 +20,7 @@ $color-4                            : #837d7daf;
             position: absolute;
             top: 2vh;
             transform: translate(0, -20%);
-            .filterTitle{ border-right: solid 1px #8f8f8f81; }
+            /* .filterTitle{ border-right: solid 1px #8f8f8f81; } */
             li{
                 padding: 10px 26px;
                 list-style-type: none;
@@ -91,7 +93,6 @@ $color-4                            : #837d7daf;
                 }
                 svg:hover{
                     background-color: #808080b4;
-                    border-radius: 20px;
                 }
             }
             .dropdown:hover .dropdown-content {
@@ -103,6 +104,7 @@ $color-4                            : #837d7daf;
    .loading{
     justify-content: center;
     display: flex;
+    background: $color-1;
 
     .spinner{
         margin-top: 10vh;

@@ -4,7 +4,7 @@ $color-3                            : black;
 $color-4                            : #3a3737fd;
 
 .nav{
-    background-color                : $color-4;
+    background-color                : $color-1;
     position                        : fixed;
     height                          : 100%;
     width                           : 4.7vw;
@@ -45,7 +45,6 @@ $color-4                            : #3a3737fd;
             font-weight             : bold;
             display                 : block;
             padding                 : 3px 6px;
-            /* color                   : $color-3; */
         }
 
         .search-content{
