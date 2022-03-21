@@ -160,7 +160,7 @@ const Table = (props) => {
                         )}
                 </tbody>
             </table>
-
+            {/* Modal for update */}
             <Modal isOpen={modalisOpen} shouldCloseOnOverlayClick={false} >
                 <a href="" onClick={closeModal}><Icon path={mdiCloseCircle} size={1} /></a>
                 <form className="student-form" onSubmit={handleUpdateSubmit}>
